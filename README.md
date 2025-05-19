@@ -1,15 +1,15 @@
 # 📁 Retrieval Hub
 
-## 🔍 Overview
+## 🔍 Overview  
 **Retrieval Hub** is a lost and found management system that allows users to report, search, and track lost or found items. Built with a PostgreSQL database and a web interface, it provides an efficient solution to handle item retrieval operations.
 
 ---
 
 ## 💼 Tech Stack
 
-- **Backend:** Django / Node.js *(Update according to your project)*
-- **Database:** PostgreSQL
-- **Frontend:** HTML / CSS / JavaScript / Bootstrap
+- **Backend:** Django / Node.js *(Update according to your project)*  
+- **Database:** PostgreSQL  
+- **Frontend:** HTML / CSS / JavaScript / Bootstrap  
 
 ---
 
@@ -26,13 +26,14 @@
 
 ## 📂 Project Structure
 
+```
 retrieval_hub/
-├── lost_and_found.sql # Database schema
-├── main/ # Django/Backend files
-├── static/ # CSS, JS, images
-├── templates/ # HTML templates
-└── README.md # Project documentation
-
+├── lost_and_found.sql      # Database schema  
+├── main/                   # Django/Backend files  
+├── static/                 # CSS, JS, images  
+├── templates/              # HTML templates  
+└── README.md               # Project documentation  
+```
 
 ---
 
@@ -40,42 +41,59 @@ retrieval_hub/
 
 ### 🛠️ Step 1: Clone the Repository
 
-
-git clone https://github.com/shronal/retrieval_hub.git
+```bash
+git clone https://github.com/shronal/retrieval_hub.git  
 cd retrieval_hub
+```
 
-🛠️ Step 2: Database Setup (PostgreSQL)
-Copy the SQL file:
-Copy the mybackup.sql file into your PostgreSQL bin directory:
+---
 
-Run the SQL file using psql:
+### 🛠️ Step 2: Database Setup (PostgreSQL)
+
+**Copy the SQL file:**  
+Copy the `mybackup.sql` file into your PostgreSQL `bin` directory.
+
+**Run the SQL file using `psql`:**  
 Open a terminal and execute:
+
+```bash
 psql -U postgres -f mybackup.sql
+```
 
-⚠️ Important Notes:
+⚠️ **Important Notes:**
 
-Make sure PostgreSQL is installed and the server is running.
-Use the correct username, password, and database name.
-Update your Django settings.py or .env file with your PostgreSQL credentials.
-Ensure the database name in the SQL file matches the one you're connecting to.
+- Make sure PostgreSQL is installed and the server is running.  
+- Use the correct username, password, and database name.  
+- Update your `settings.py` or `.env` file with PostgreSQL credentials.  
+- Ensure the database name in the SQL file matches the one you're connecting to.  
 
+---
 
+### 🛠️ Step 3: Install Dependencies & Run the Project
 
-🛠️ Step 3: Install Dependencies & Run the Project
-If you're using Django:
-pip install -r requirements.txt
-python manage.py makemigrations
-python manage.py migrate
+If you're using Django, run:
+
+```bash
+pip install -r requirements.txt  
+python manage.py makemigrations  
+python manage.py migrate  
 python manage.py runserver
+```
 
-Now visit:
-http://127.0.0.1:8000/
+Now visit:  
+[http://127.0.0.1:8000/](http://127.0.0.1:8000/)
+
+---
 
 ## 👨‍💻 Author
-👤 Name: Shronal Shrestha
-🏫 Institution: Khwopa Engineering College
-🌐 Portfolio: shronal.com.np
 
-##📜 License
-This project is for educational purposes only.
+- 👤 Name: Shronal Shrestha  
+- 🏫 Institution: Khwopa Engineering College  
+- 🌐 Portfolio: [shronal.com.np](https://shronal.com.np)
+
+---
+
+## 📜 License
+
+This project is for educational purposes only.  
 You are free to learn from or build upon it with proper credit.
