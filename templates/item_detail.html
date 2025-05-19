@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Item Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .item-container {
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 600px;
+            margin: auto;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .item-details img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            margin: 0 auto 20px;
+        }
+        .detail-label {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        .detail-row {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="item-container">
+        <h1>Item Details</h1>
+        <div class="item-details">
+            {% if item.photo %}
+                <img src="{{ item.photo.url }}" alt="Photo of {{ item.item_name }}">
+            {% else %}
+                <p>No photo available</p>
+            {% endif %}
+            
+            <div class="detail-row">
+                <span class="detail-label">ID:</span> {{ item.id }}
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Item Name:</span> {{ item.item_name }}
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Description:</span> {{ item.description }}
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Date Reported/Found:</span> {{ item.date_reported|default:item.date_found }}
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Location:</span> {{ item.location }}
+            </div>
+            <!-- Add more fields here as needed -->
+        </div>
+    </div>
+</body>
+</html>

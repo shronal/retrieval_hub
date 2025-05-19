@@ -1,0 +1,246 @@
+{% extends "base.html" %}
+{% load static %}
+{% block homeactive %}active{% endblock homeactive %}
+{% block title %} Home {% endblock title %}
+{% block body %}
+    <style>
+        /* Main body styling */
+        body {
+            background: radial-gradient( 95.2deg, rgba(173,252,234,1) 26.8%, rgba(192,229,246,1) 64% );
+            background-size: 400% 400%;
+            animation: gradientAnimation 10s ease infinite;
+            margin: 0;  /* Ensure no extra margin */
+            padding: 0; /* Ensure no extra padding */
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
+        
+        /* Container styling */
+        .container {
+            text-align: center;
+            max-width: 800px;
+            margin: 0px auto; /* Reduce vertical space */
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            padding: 15px; /* Adjust padding */
+        }
+      
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .report-columns {
+                flex-direction: column;
+                padding: 10px; /* Reduce padding for smaller screens */
+            }
+        }
+        .countdown {
+            font-size: 48px;
+            font-weight: bold;
+            color: #006666;
+            margin: 20px 0;
+            animation: fadeIn 2s ease-in-out;
+        }
+    
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    
+        @keyframes gradientAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        /* Main Columns Styling */
+        .report-columns {
+            display: flex;
+            gap: 40px; /* Increased gap between main columns */
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+    
+        .report-column {
+            flex: 1 1 45%; /* Increased width of each main column */
+            min-width: 350px; /* Ensures columns don't shrink too much */
+            max-width: 500px; /* Prevents columns from growing too large */
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+    
+        .sub-columns {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px; /* Increased gap between sub-columns */
+        }
+    
+        .sub-column {
+            flex: 1 1 calc(50% - 20px); /* Adjusted sub-column width */
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+    
+        .sub-column:hover {
+            background-color: #f1f1f1;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+    
+        .report-title {
+            font-weight: bold;
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+    
+        .report-details {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 5px;
+        }
+    
+        .details-button {
+            margin-top: 10px;
+            padding: 5px 15px;
+            background-color: #006666;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+    
+        .details-button:hover {
+            background-color: #004d4d;
+        }
+    
+        /* Popup Styling */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+    
+        .popup-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 600px;
+            width: 90%;
+            position: relative;
+        }
+    
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+    </style>
+
+    <!-- Header Section -->
+    <div class="header">
+        <h1>The Khwopa Retrieval</h1>
+        <img src="{% static 'images/first.png' %}" alt="TheRetrievalHub Logo">
+    </div>
+
+    <div class="container">
+        <p class="intro-text">Have you lost something or found an item? We’re here to help!</p>
+        <a href="/rli" class="btn">Report Lost Item</a>
+        <a href="/rfi" class="btn">Report Found Item</a>
+        <a href="/available-reports" class="btn">Search for Items</a>
+    </div>
+
+    <div class="report-columns">
+        <!-- Lost Items Column -->
+        <div class="report-column">
+            <h2>Recent Lost Items</h2>
+            {% if recent_lost_items %}
+                <div class="sub-columns">
+                    {% for item in recent_lost_items %}
+                        <div class="sub-column">
+                            <p class="report-title">{{ item.item_name }}</p>
+                            <p class="report-details">Reported on: {{ item.date_lost|date:"F j, Y" }}</p>
+                            <p class="report-details">Reported by: {{ item.name|truncatewords:10 }}</p>
+                            {% comment %} <button class="details-button" onclick="openDetailsPopup('{{ item.pk }}', 'lost')">Details</button> {% endcomment %}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p>No recent lost items found.</p>
+            {% endif %}
+        </div>
+    
+        <!-- Found Items Column -->
+        <div class="report-column">
+            <h2>Recent Found Items</h2>
+            {% if recent_found_items %}
+                <div class="sub-columns">
+                    {% for item in recent_found_items %}
+                        <div class="sub-column">
+                            <p class="report-title">{{ item.item_name }}</p>
+                            <p class="report-details">Reported on: {{ item.date_found|date:"F j, Y" }}</p>
+                            <p class="report-details">Reported by: {{ item.name|truncatewords:10 }}</p>
+                            {% comment %} <button class="details-button" onclick="openDetailsPopup('{{ item.pk }}', 'found')">Details</button> {% endcomment %}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p>No recent found items available.</p>
+            {% endif %}
+        </div>
+    </div>
+    
+    <!-- Popup Container -->
+    <div id="details-popup" class="popup">
+        <div class="popup-content">
+            <span class="close-button" onclick="closeDetailsPopup()">&times;</span>
+            <div id="popup-details"></div>
+        </div>
+    </div>
+    
+<div class = "container">
+<div class="countdown" id="countdown">0</div>
+<p>Total Reports Submitted</p>
+</div>
+    <script>
+        // Countdown Animation
+        const totalReports = {{ total_reports|default:0 }};
+        const countdownElement = document.getElementById('countdown');
+        let currentCount = 0;
+    
+        const interval = setInterval(() => {
+            if (currentCount < totalReports) {
+                currentCount++;
+                countdownElement.textContent = currentCount;
+            } else {
+                clearInterval(interval);
+            }
+        }, 10); // Adjust speed of the countdown
+    </script>
+{% endblock body %}

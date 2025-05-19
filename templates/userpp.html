@@ -1,0 +1,264 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Your Profile{% endblock title %}
+{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" sizes="180x180" href="{% static 'images/logo-noname.png' %}">
+    <title>Login</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            display: block;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(to right, #006666,rgb(4, 51, 51));
+        }
+
+        .container {
+            display: flex;
+            width: 900px;
+            height: 500px;
+            background: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            padding: 5px 5px 5px 5px;
+        }
+
+        /* Left Side (Welcome Section) */
+        .welcome-section {
+            background: #006666;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            padding: 20px;
+            border-radius: 15px;
+        }
+
+        .welcome-section h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .welcome-section p {
+            font-size: 16px;
+            margin-bottom: 30px;
+        }
+
+        .welcome-section a {
+            text-decoration: none;
+            color: #006666;
+            background: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .welcome-section a:hover {
+            background: #f0f4f8;
+            color: #006666;
+        }
+
+        /* Right Side (Login Form) */
+        .login-section {
+            flex: 1;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .login-section h3 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+            font-size: 14px;
+        }
+
+        input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 20px;
+            padding: 10px;
+            background: #006666;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background: #006666;
+        }
+
+        .links {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .links a {
+            text-decoration: none;
+            color: #006666;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .links a:hover {
+            color: #006666;
+        }
+        /* Logo Style */
+        .logo {
+            display: block;
+            margin: 20px auto;
+            width: 150px; /* Adjust the width as needed */
+            height: auto;
+
+        }
+        .nav-menu {
+            padding: 1rem;
+        }
+        
+        .nav-menu ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .nav-menu li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .nav-menu a {
+            color: #006d77;
+            text-decoration: none;
+            padding: 0.5rem;
+            display: block;
+            transition: background-color 0.3s ease;
+        }
+        
+        .nav-menu a:hover {
+            background-color: #edf6f9;
+            border-radius: 4px;
+        }
+
+        .nav-menu a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background-color: #006d77;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        
+        .nav-menu img {
+            width: 24px;
+            height: 24px;
+            object-fit: cover;
+        }
+        
+        .nav-menu a:hover {
+            background-color: #004c4c;
+            transform: scale(1.05);
+        }
+        
+        .nav-menu li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .nav-menu ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        {% comment %} <img src="{% static 'images/logo-noname.png' %}" alt="Logo" class="logo"> {% endcomment %}
+        <!-- Welcome Section -->
+        <div class="welcome-section">
+            <p><img src="{% static 'images/up.svg' %}" alt="Logo" class="logo"></p>
+            <h2>Hello, Welcome!</h2>
+            <p>Thanks for joining us !!</p>
+            <a href="/home">Go to home</a>
+            <br>
+            <p>Designed and Developed By Shronal Duwal</p>
+        </div>
+        <!-- Login Section -->
+        <nav class="nav-menu">
+            <ul>
+                <li>
+                    <a href="{% url 'list_reports' %}">
+                        <img src={% static 'images/report.png' %} alt="Reports Icon">
+                        Your Reports
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'edit_profile' %}">
+                        <img src={% static 'images/edit.png' %} alt="Profile Icon">
+                        Edit Profile
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'change_password' %}">
+                        <img src={% static 'images/password.png' %} alt = "Password Icon" >
+                        Change Password
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'Logout Page' %}">
+                       <img src = {% static 'images/logout.png'%} alt = "Logout Icon">
+                        Logout
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        
+        
+    </div>
+</body>
+</html>
+{% endblock %}

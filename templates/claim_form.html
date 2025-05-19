@@ -1,0 +1,181 @@
+{% extends "base.html" %}
+{% block title %}Claim{% endblock title %}
+{% block reportactive %}active{% endblock reportactive %}
+{% load static %}
+{% block body %}
+<head>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        h2 {
+            text-align: center;
+            color: #842029;
+            margin-top: 20px;
+        }
+
+        .container {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            padding: 20px;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+
+        .alert-box {
+            flex: 2;
+            background-color: #f8d7da;
+            color: #842029;
+            padding: 50px;
+            border-radius: 8px;
+            border: 1px solid #f5c2c7;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .alert-box h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .alert-box p {
+            font-size: 14px;
+        }
+
+        .claim-form {
+            flex: 3;
+            background-color: #fff;
+            padding: 30px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .claim-form p {
+            font-size: 16px;
+            margin: 10px 0;
+        }
+
+        .claim-form label {
+            font-weight: bold;
+            margin: 10px 0 5px;
+            display: block;
+            font-size: 14px;
+        }
+
+        .claim-form input,
+        .claim-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+
+        .claim-form textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .claim-form button {
+            background-color: #006666;
+            color: #fff;
+            padding: 12px 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .claim-form button:hover {
+            background-color: #004d4d;
+        }
+
+        /* Logo Style */
+        .logo {
+            display: block;
+            margin: 20px auto;
+            width: 220px; /* Adjust the width as needed */
+            height: auto;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .alert-box {
+                margin-bottom: 20px;
+            }
+
+            .claim-form {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+
+<div class="container">
+
+    
+    <!-- Left Column: Alert Message -->
+    <div class="alert-box">
+        <!-- Logo Section -->
+        
+        <h2>Important Notice</h2>
+        <img src="{% static 'images/warn.svg' %}" alt="Logo" class="logo">
+        <br>
+        <p>Please claim this item only if it belongs to you.</p>
+        <p>Ensure that the description you provide matches the details submitted when reporting the item.</p>
+        <p>False claims may result in the rejection of your request.</p>
+        <p>Once it's confirmed that the item belongs to you we will sent you an mail to collect.</p>
+
+        <p><strong>Item:</strong> {{ item.item_name }}</p>
+            <p><strong>Reported By:</strong> {{ item.name }}</p>
+            {% comment %} <p><strong>Photo:</strong> {{ item.photo }}</p> {% endcomment %}
+
+            {% if model_name == 'lost' %}
+                <p><strong>Date Lost:</strong> {{ item.date_lost|date:"F j, Y" }}</p>
+            {% else %}
+                <p><strong>Date Found:</strong> {{ item.date_found|date:"F j, Y" }}</p>
+            {% endif %}
+    </div>
+
+    <!-- Right Column: Claim Form -->
+    <div class="claim-form">
+        <form method="post">
+            {% csrf_token %}
+            <label for="name">Your Name:</label>
+            <input type="text" name="name" id="name" required><br>
+
+            <label for="email">Your Email:</label>
+            <input type="email" name="email" id="email" required><br>
+
+            <label for="phone">Your Phone:</label>
+            <input type="text" name="phone" id="phone" required><br>
+
+            <label for="message">Why do you think this item is yours?</label>
+            <textarea name="message" id="message" required></textarea><br>
+
+            <button type="submit">Submit Claim</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,84 @@
+body {
+    font-family: Arial, sans-serif;
+}
+.report-section {
+    margin: 10px;
+    margin-bottom: 30px;
+}
+h2 {
+    border-bottom: 2px solid #333;
+    padding-bottom: 5px;
+    display: flex;
+    position: relative;  /* Allows for positioning of child elements */
+    justify-content: space-between;  /* Space between title and search */
+    align-items: center;  /* Center vertically */
+}
+.search-bar {
+    margin-left: 10px;
+    width: 150px; /* Approximately 5cm */
+    padding: 5px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+th {
+    background-color: #f2f2f2;
+}
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+img {
+    max-width: 100px;
+    height: auto;
+}
+.claim-btn {
+    background-color: #007BFF;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.claim-btn:hover {
+    background-color: #0056b3;
+}
+.highlight {
+    background-color: yellow;
+}
+
+.search-container {
+    position: absolute;  /* Position it absolutely */
+    right: 0;  /* Align to the right */
+}
+
+.search-bar {
+    width: 100px;  /* Adjust width as needed */
+    padding: 5px 30px 5px 10px;  /* Adjust padding */
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;  /* Adjust font size */
+}
+
+.search-icon {
+    position: absolute;
+    right: 5px;  /* Position the icon */
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    background: none;
+    cursor: pointer;
+    outline: none;
+}
+
+.search-icon i {
+    font-size: 16px;  /* Icon size */
+    color: #007BFF;  /* Icon color */
+} 
+

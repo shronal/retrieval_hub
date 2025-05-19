@@ -1,0 +1,62 @@
+.footer {
+    background-color: rgba(70, 70, 70, 0.9); /* Dark background to match the theme */
+    padding: 20px;
+    color: #fff; /* Light text */
+    font-family: 'Georgia', serif; /* Matching Georgia font */
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center align items */
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px; /* Limit max width for larger screens */
+    margin-bottom: 20px; /* Space between content and bottom */
+}
+
+.links-column {
+    margin-right: 20px; /* Space between link columns */
+}
+
+.links-column h4, .contact-info h4 {
+    margin: 0 0 10px; /* Spacing for headings */
+}
+
+.links-column ul {
+    list-style-type: none; /* Remove bullet points */
+    padding: 0; /* Remove padding */
+}
+
+.links-column ul li {
+    margin-bottom: 5px; /* Space between list items */
+}
+
+.links-column a, .contact-info a {
+    color: cyan; /* Link color */
+    text-decoration: none; /* Remove underline */
+}
+
+.links-column a:hover, .contact-info a:hover {
+    text-decoration: underline; /* Underline on hover */
+}
+
+.contact-info {
+    text-align: right; /* Align text to the right */
+}
+
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px; /* Limit max width for larger screens */
+    text-align: center; /* Center align text */
+    margin-top: 20px; /* Space above bottom section */
+}
+
+.designer {
+    text-align: right; /* Align designer info to the right */
+    color: cyan; /* Cyan color to match other parts of the theme */
+    font-size: 1rem;
+}

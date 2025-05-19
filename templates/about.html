@@ -1,0 +1,224 @@
+{% extends "base.html" %}
+{%load static %}{% block aboutactive %}active{% endblock aboutactive %}
+{% block title %} About {% endblock title %} 
+{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'about.css' %}">
+    <title>Lost and Found</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        
+        h2 {
+            color: #006666;
+            margin-bottom: 20px;
+        }
+        
+        .button {
+            display: inline-block;
+            background-color: #006666;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        
+        .button:hover {
+            background-color: #004444;
+        }
+        
+        /* Description Section */
+        .description {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 50px;
+            background-color: #f9f9f9;
+        }
+        
+        .description img {
+            max-width: 300px;
+            height: auto;
+        }
+        
+        /* Inspiration Section */
+        .inspiration {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 50px;
+            background-color: #fff;
+        }
+        
+        .inspiration img {
+            max-width: 400px;
+            height: auto;
+        }
+        
+        /* How It Works Section */
+        .steps {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            padding: 50px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .step {
+            flex-basis: calc(33.333% - 40px);
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .step:hover {
+            transform: translateY(-5px);
+        }
+        
+        .step img {
+            max-width: 100px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+        
+        .step h3 {
+            color: #006666;
+            margin-bottom: 15px;
+        }
+        
+        .step p {
+            margin-bottom: 20px;
+        }
+        
+        .step .button {
+            margin: 5px;
+        }
+        
+        @media (max-width: 992px) {
+            .step {
+                flex-basis: calc(50% - 40px);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .step {
+                flex-basis: 100%;
+            }
+        }
+        
+        .marquee-container {
+            width: 100%;
+            overflow: hidden;
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 10px 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .marquee-text {
+            display: inline-block;
+            white-space: nowrap;
+            animation: marquee 10s linear infinite;
+            font-size: 1.2rem;
+            color: #495057;
+            font-weight: bold;
+        }
+        
+        @keyframes marquee {
+            0% {
+                transform: translateX(100%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .marquee-text {
+                font-size: 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .marquee-text {
+                font-size: 0.9rem;
+            }
+        }
+        
+        
+    </style>
+</head>
+
+<body>
+    {% load static %}
+    <!-- Description Section -->
+    <section class="description">
+        <div>
+            <h2>About Our Website</h2>
+            <p>Our Lost and Found platform helps you list your lost items and find what others may have found. It's easy, quick, and designed to help the community connect over lost belongings.</p>
+        </div>
+        <img src="{% static 'images/abt.svg' %}" alt="TheRetrievalHub" style="display: block; margin-left: auto; margin-right: auto; width: 350px; height: auto;">
+    </section>
+
+    <!-- Inspiration Section -->
+    <section class="inspiration">
+        <img src="{% static 'images/mathi.svg'  %}" alt="Inspiration" style="display: block; margin-left: auto; margin-right: auto; width: 350px; height: auto;">
+        <div>
+            <h2>My Project Inspiration</h2>
+            <p>Colleges are the place where we often lose our belongings, from earphones to important documents. This platform was inspired by the need to help students recover their lost items more easily and efficiently.</p>
+            {% comment %} <a href="#get-started" class="button">Get Started</a> {% endcomment %}
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section>
+        <div>
+            <h2>How It Works?</h2>
+        </div>
+        <div class="steps">
+            <div class="step">
+                <img src="{% static 'images/1num.svg' %}" alt="Create Account">
+                <h3>Create an account</h3>
+                <p>Initially, you have to create an account to get started.</p>
+                {% comment %} <a href="/signup" class="button">Sign Up</a> {% endcomment %}
+            </div>
+            <div class="step">
+                <img src="{% static 'images/2num.svg' %}" alt="List Item">
+                <h3>List Lost/Found Item</h3>
+                <p>List your item on the wall by filling in certain details and an image. That’s it!</p>
+                {% comment %} <a href="/rfi" class="button">Found</a>
+                <a href="/rli" class="button">Lost</a> {% endcomment %}
+            </div>
+            <div class="step">
+                <img src="{% static 'images/3num.svg' %}" alt="Get Notified">
+                <h3>Get Notified</h3>
+                <p>Once someone posts an item, we notify registered users about it.</p>
+            </div>
+        </div>
+    </section>
+    <div class="marquee-container">
+        <div class="marquee-text">
+            Have you lost something or found an item? We’re here to help!
+        </div>
+    </div>
+</body>
+
+</html>
+{% endblock body %}

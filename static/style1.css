@@ -1,0 +1,184 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Roboto:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Roboto:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+body {
+    background-size: 400% 400%;
+    background: radial-gradient( 95.2deg, rgba(173,252,234,1) 26.8%, rgba(192,229,246,1) 64%, #00bcd4, #2196f3,);
+    animation: gradientAnimation 10s ease infinite;
+    margin: 0px;
+    padding: 0;
+    font-family: 'Georgia', serif;
+    scroll-behavior: smooth;
+    color: #333;
+}
+
+@keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    25% { background-position: 50% 0%; }
+    50% { background-position: 100% 50%; }
+    75% { background-position: 50% 100%; }
+    100% { background-position: 0% 50%; }
+}
+/* Base styles for navbar */
+.navbar { 
+    background: transparent;
+    backdrop-filter: blur(10px);
+    padding: 8px 16px; /* Adjust padding to give more room to the content */
+}
+
+/* Base styles for navbar links */
+.navbar-nav .nav-link {
+    position: relative;
+    padding: 10px 20px;
+    text-decoration: none;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+/* Pseudo-element for underline effect */
+.navbar-nav .nav-link::before {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #81C2E6;
+    transition: width 0.3s ease;
+}
+
+/* Hover effect for links */
+.navbar-nav .nav-link:hover {
+    color: #81C2E6;
+    text-shadow: 0 0 8px rgba(0, 255, 255, 0.8), 0 0 16px rgba(0, 255, 255, 0.5); /* Glowing text effect */
+}
+
+.navbar-nav .nav-link:hover::before {
+    width: 100%; /* Full width on hover */
+}
+
+/* Toggler button styles */
+.navbar-toggler {
+    transition: background-color 0.3s ease;
+    padding: .375rem .75rem;
+    border-radius: .25rem;
+}
+
+.navbar-toggler:hover {
+    background-color: rgba(255, 253, 208, 0.8);
+}
+
+/* Styling the logo */
+.navbar-logo {
+    max-height: 60px; /* Adjust the height of the logo without affecting the navbar */
+    width: auto; /* Maintain aspect ratio */
+    display: inline-block;
+    vertical-align: middle; /* Align the logo vertically with the navbar */
+    margin-right: 15px; /* Spacing between the logo and the links */
+}
+
+/* Adjust padding for the links to make space for the logo */
+.navbar-nav {
+    margin-left: auto; /* Push the nav links to the right */
+}
+.badge {
+    font-size: 0.75em;
+    padding: 0.5em;
+}
+/* Header section */
+.header {
+    background: radial-gradient(circle, #00bcd4, #2196f3, #3f51b5);
+    background-size: 400% 400%;
+    animation: gradientAnimation 10s ease infinite;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.header h1 {
+    font-size: 2.5em;
+    color: black;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.header img {
+    max-width: 40%;
+    height: auto;
+}
+
+/* Unique styles for section headings */
+h2 {
+    font-family: 'Qlassy', sans-serif; /* Use Qlassy font */
+    font-size: 2.5em; /* Increase size */
+    font-weight: 700; /* Bold weight */
+    color: #6200ea; /* Unique color */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+    letter-spacing: 1px; /* Increase letter spacing */
+    margin: 40px 0 20px; /* Spacing above and below */
+    transition: transform 0.3s ease; /* Smooth transformation */
+}
+
+h2:hover {
+    transform: scale(1.01); /* Scale up on hover for effect */
+    color: #020202; /* Change color on hover */
+}
+
+/* Section styling */
+section {
+    padding: 80px 50px;
+    text-align: center; /* Center-align text */
+}
+
+.description, .inspiration, .how-it-works {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    opacity: 0;
+    transform: translateY(50px);
+    animation: fadeInUp 0.6s forwards; /* Animation */
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.description img, .inspiration img {
+    max-width: 45%;
+    height: auto;
+}
+
+.description div, .inspiration div {
+    max-width: 50%;
+}
+
+.description p, .inspiration p {
+    font-size: 1.2em;
+    line-height: 1.6;
+    margin-top: 20px; /* Add margin for spacing */
+}
+
+/* Buttons */
+.button {
+    display: inline-block;
+    justify-content: space-between;
+    padding: 10px 20px;
+    margin-top: 20px;
+    color: white;
+    background-color: #6200ea;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.button:hover {
+    background-color: #3700b3;
+}

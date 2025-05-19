@@ -1,0 +1,195 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" sizes="180x180" href="{% static 'images/logo-noname.png' %}">
+    <title>Login</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(to right, #006666,rgb(4, 51, 51));
+        }
+
+        .container {
+            display: flex;
+            width: 900px;
+            height: 500px;
+            background: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Left Side (Welcome Section) */
+        .welcome-section {
+            background: #006666;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            padding: 20px;
+        }
+
+        .welcome-section h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .welcome-section p {
+            font-size: 16px;
+            margin-bottom: 30px;
+        }
+
+        .welcome-section a {
+            text-decoration: none;
+            color: #006666;
+            background: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .welcome-section a:hover {
+            background: #f0f4f8;
+            color: #006666;
+        }
+
+        /* Right Side (Login Form) */
+        .login-section {
+            flex: 1;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .login-section h3 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+            font-size: 14px;
+        }
+
+        input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 20px;
+            padding: 10px;
+            background: #006666;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background: #006666;
+        }
+
+        .links {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .links a {
+            text-decoration: none;
+            color: #006666;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .links a:hover {
+            color: #006666;
+        }
+        /* Logo Style */
+        .logo {
+            display: block;
+            margin: 20px auto;
+            width: 150px; /* Adjust the width as needed */
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        {% comment %} <img src="{% static 'images/logo-noname.png' %}" alt="Logo" class="logo"> {% endcomment %}
+        <!-- Welcome Section -->
+        <div class="welcome-section">
+            <p><img src="{% static 'images/logo-noname.png' %}" alt="Logo" class="logo"></p>
+            <h2>Hello, Welcome!</h2>
+            <p>Don't have an account?</p>
+            <a href="/signup">Register</a>
+        </div>
+
+        <!-- Login Section -->
+        <div class="login-section">
+            <form method="post">
+                <h3>Login Here</h3>
+                {% csrf_token %}
+                
+                <!-- Username -->
+                <label for="username">Username</label>
+                <input type="text" placeholder="Enter Username" id="username" name="username">
+                
+                <!-- Password -->
+                <label for="password">Password</label>
+                <input type="password" placeholder="Password" id="password" name="pass">
+                
+                <!-- Remember Me -->
+                <div style="display: flex; align-items: center; margin-top: 15px;">
+                    <input type="checkbox" id="remember" name="remember">
+                    <label for="remember" style="margin-left: 10px;">Remember Me</label>
+                </div>
+                
+                <!-- Submit Button -->
+                <button type="submit">Log In</button>
+                
+                <!-- Links -->
+                <div class="links">
+                    <a href="/forgot-password">Forgot Password?</a>
+                    <a href="/signup">Create an account</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

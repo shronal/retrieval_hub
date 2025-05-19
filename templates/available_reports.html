@@ -1,0 +1,334 @@
+{% extends "base.html" %}
+{% load static %}
+{% block reportactive %}active{% endblock reportactive %}
+{% block title %} Reports {% endblock title %}
+{% block body %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'reports.css' %}">
+    <title>Available Reports</title>
+    <style>/* General Styles */
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        
+        .report-section {
+            margin: 20px;
+        }
+        
+        h2 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        /* Search Bar Styles */
+        .search-bar {
+            padding: 5px;
+            width: 200px;
+            margin-left: 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        
+        .search-bar:focus {
+            outline: none;
+            border-color: #006666;
+        }
+        
+        /* Found and Lost Items Container */
+        .reports-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        
+        /* Report Box Styling */
+        .report-box {
+            width: 30%;
+            min-width: 250px;
+            background-color: #fff;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+            padding: 15px;
+        }
+        
+        .report-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            border-color:  #006666;
+        }
+        
+        .report-box img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        
+        .report-box .default-image {
+            background-color: #f0f0f0;
+            width: 100%;
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: #888;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        
+        /* Title and Details */
+        .report-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 10px 0;
+            color: # #006666;
+        }
+        
+        .report-details {
+            font-size: 14px;
+            color: #333;
+            margin: 5px 0;
+        }
+        
+        /* Button Styles */
+        .claim-btn {
+            display: inline-block;
+            padding: 6px 12px;
+            background-color: #006666;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+            border: none; /* Remove any button border */
+            outline: none; /* Remove outline when clicked */
+            box-shadow: none; /* Remove shadow */
+        }
+        
+        .claim-btn:focus {
+            outline: none;
+        }
+        
+        button {
+            background: none; /* Remove button background */
+            border: none; /* Remove button border */
+            padding: 0; /* Remove padding */
+            cursor: pointer; /* Change cursor to pointer */
+        }
+        
+        button a {
+            display: inline-block;
+            text-decoration: none; /* Ensure the link doesn't have an underline */
+        }
+        
+        .claim-btn:hover {
+            background-color:  #006666;
+        }
+        
+        .claim-btn:focus {
+            outline: none;
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            overflow: auto;
+        }
+        
+        .modal-content {
+            background-color: #fff;
+            margin: 10% auto;
+            padding: 20px;
+            border-radius: 8px;
+            width: 80%;
+            max-width: 600px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .close-btn {
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            float: right;
+            cursor: pointer;
+        }
+        
+        .close-btn:hover,
+        .close-btn:focus {
+            color: black;
+        }
+        
+        #modalDetails {
+            margin-top: 20px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .report-box {
+                width: 45%;
+            }
+        
+            .search-bar {
+                width: 150px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .report-box {
+                width: 100%;
+            }
+        
+            .modal-content {
+                width: 90%;
+            }
+        
+            .search-bar {
+                width: 120px;
+            }
+        }
+        
+    </style>
+</head>
+<body>
+    <!-- Found Items Section -->
+    <div class="report-section">
+        <h2>Found Items
+            <form method="GET" action="{% url 'available_reports' %}" style="display: inline;">
+                <input type="text" name="search" class="search-bar" placeholder="Search..." value="{{ search_query }}">
+                <button type="submit" class="search-icon"><i class="fa fa-search"></i></button>
+            </form>
+        </h2>
+        <div class="reports-container">
+            {% if found_reports %}
+                {% for report in found_reports %}
+                    <div class="report-box">
+                        {% if report.photo %}
+                            <img src="{{ report.photo.url }}" alt="Photo of {{ report.item_name }}">
+                        {% else %}
+                            <div class="default-image">No photo available</div>
+                        {% endif %}
+                        <p class="report-title">{{ report.item_name }}</p>
+                        <p class="report-details">Location Found: {{ report.location_found }}</p>
+                        <p class="report-details">Date Found: {{ report.date_found }}</p>
+                        <p class="report-details">Reported By: {{ report.name }}</p>
+                        <button><a href="{% url 'claim_item' 'found' report.id %}" class="claim-btn">Claim</a></button>
+                        <button class="claim-btn details-btn" data-id="{{ report.id }}" data-type="found">Details</button>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>No found items reported.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Lost Items Section -->
+    <div class="report-section">
+        <h2>Lost Items
+            <form method="GET" action="{% url 'available_reports' %}" style="display: inline;">
+                <input type="text" name="search" class="search-bar" placeholder="Search..." value="{{ search_query }}">
+                <button type="submit" class="search-icon"><i class="fa fa-search"></i></button>
+            </form>
+        </h2>
+        <div class="reports-container">
+            {% if lost_reports %}
+                {% for report in lost_reports %}
+                    <div class="report-box">
+                        {% if report.photo %}
+                            <img src="{{ report.photo.url }}" alt="Photo of {{ report.item_name }}">
+                        {% else %}
+                            <div class="default-image">No photo available</div>
+                        {% endif %}
+                        <p class="report-title">{{ report.item_name }}</p>
+                        <p class="report-details">Location Lost: {{ report.location_lost }}</p>
+                        <p class="report-details">Date Reported: {{ report.date_lost }}</p>
+                        <p class="report-details">Reported By: {{ report.name }}</p>
+                        {% comment %} <button><a href="{% url 'claim_item' 'lost' report.id %}" class="claim-btn details-btn">Claim</a></button> {% endcomment %}
+                        <button class="claim-btn details-btn" data-id="{{ report.id }}" data-type="lost">Details</button>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>No lost items found.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="detailsModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Item Details</h2>
+            <div id="modalDetails">
+                <!-- Details will be populated here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const modal = document.getElementById("detailsModal");
+            const modalDetails = document.getElementById("modalDetails");
+            const closeBtn = document.querySelector(".close-btn");
+
+            document.querySelectorAll(".details-btn").forEach(button => {
+                button.addEventListener("click", function () {
+                    const itemId = this.dataset.id;
+                    const itemType = this.dataset.type;
+
+                    // Fetch item details (AJAX)
+                    fetch(`/get_item_details/${itemType}/${itemId}/`)
+                        .then(response => response.json())
+                        .then(data => {
+                            modalDetails.innerHTML = `
+                                <p><strong>ID:</strong> ${data.id}</p>
+                                <p><strong>Item Name:</strong> ${data.item_name}</p>
+                                <p><strong>Location:</strong> ${data.location}</p>
+                                <p><strong>Date:</strong> ${data.date}</p>
+                                <p><strong>Reported By:</strong> ${data.name}</p>
+                                ${data.photo ? `<img src="${data.photo}" alt="Photo of ${data.item_name}" style="max-width: 100%;">` : '<p>No photo available</p>'}
+                            `;
+                            modal.style.display = "block";
+                        })
+                        .catch(error => console.error("Error fetching item details:", error));
+                });
+            });
+
+            closeBtn.addEventListener("click", function () {
+                modal.style.display = "none";
+            });
+
+            window.addEventListener("click", function (event) {
+                if (event.target === modal) {
+                    modal.style.display = "none";
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+{% endblock body %}
